@@ -67,9 +67,18 @@ public class DAOProduct extends DBContext {
 
     public Product getProById(String id) {
 
-        String sql = "select * from Product_HE151186 where product_id = ? ";
+        String sql = "SELECT [product_id]\n"
+                + "      ,[product_name]\n"
+                + "      ,[product_image]\n"
+                + "      ,[brand_id]\n"
+                + "      ,[product_size]\n"
+                + "      ,[product_price]\n"
+                + "      ,[product_description]\n"
+                + "      ,[tech_id]\n"
+                + "      ,[cate_id]\n"
+                + "  FROM [Product_HE151186] WHERE product_id = ? ";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = ps(sql);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -186,16 +195,14 @@ public class DAOProduct extends DBContext {
         // neu brandd va category ton tai
         if (!"".equals(bid_raw) && !"".equals(cid_raw)) {
             sql += "AND [cate_id] = '" + cid_raw + "'\n";
-        }
-        // neu chi category ton tai
+        } // neu chi category ton tai
         else if ("".equals(bid_raw) && !"".equals(cid_raw)) {
             sql += " [cate_id] = '" + cid_raw + "'\n";
         }
         // neu 1 trong 2 truong brand, cate ton tai va truong tech ton tai
         if ((!"".equals(bid_raw) || !"".equals(cid_raw)) && !"".equals(tid_raw)) {
             sql += "AND [tech_id] = '" + tid_raw + "'";
-        }
-        // neu chi truong technology ton tai
+        } // neu chi truong technology ton tai
         else if ("".equals(bid_raw) && "".equals(cid_raw) && !"".equals(tid_raw)) {
             sql += "[tech_id] = '" + tid_raw + "'";
         }

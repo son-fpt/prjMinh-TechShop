@@ -21,6 +21,7 @@ public class Product {
     private String des;
 
     public Product() {
+        
     }
 
     public Product(String id, String name, String image, Brand brand, Technology tech, Category cate, int size, double price, String des) {

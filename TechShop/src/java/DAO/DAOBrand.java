@@ -52,8 +52,6 @@ public class DAOBrand extends DBContext {
             }
         } catch (Exception e) {
             System.out.println(e);
-        } finally {
-            close();
         }
         return null;
     }

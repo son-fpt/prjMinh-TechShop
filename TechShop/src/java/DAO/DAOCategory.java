@@ -52,8 +52,6 @@ public class DAOCategory extends DBContext {
             }
         } catch (Exception e) {
             System.out.println(e);
-        } finally {
-            close();
         }
         return null;
     }

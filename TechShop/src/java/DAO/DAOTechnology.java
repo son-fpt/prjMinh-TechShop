@@ -40,7 +40,7 @@ public class DAOTechnology extends DBContext {
                 + "      ,[tech_description]\n"
                 + "  FROM [Technology_HE151186] WHERE tech_id = ?";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = ps(sql);
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
@@ -52,8 +52,6 @@ public class DAOTechnology extends DBContext {
             }
         } catch (Exception e) {
             System.out.println(e);
-        } finally {
-            close();
         }
         return null;
     }

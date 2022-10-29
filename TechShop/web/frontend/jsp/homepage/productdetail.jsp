@@ -43,7 +43,7 @@
                                             <div class="card-block">
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <img src="/${requestScope.product.image}" alt="alt"/>
+                                                        <img src="${requestScope.product.image}" alt="alt"/>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -84,7 +84,12 @@
                                                 <div>${requestScope.product.des}</div>
                                             </div>    
                                             <div class="row">
-                                                <button>Add to card</button>
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <button class="btn btn-primary waves-effect waves-light">Add to card</button>
+                                                    </div>
+                                                   
+                                                </div>
                                             </div>
                                             <!--                                                <div class="dt-responsive table-responsive">
                                                                                                 <form method="GET" action="productdetail">
