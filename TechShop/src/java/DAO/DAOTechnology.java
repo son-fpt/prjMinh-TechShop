@@ -19,7 +19,7 @@ public class DAOTechnology extends DBContext {
         String sql = "SELECT [tech_id]\n"
                 + "      ,[tech_name]\n"
                 + "      ,[tech_description]\n"
-                + "  FROM [Technology]";
+                + "  FROM [Technology_HE151186]";
         try {
             PreparedStatement st = ps(sql);
             ResultSet rs = st.executeQuery();
@@ -38,7 +38,7 @@ public class DAOTechnology extends DBContext {
         String sql = "SELECT [tech_id]\n"
                 + "      ,[tech_name]\n"
                 + "      ,[tech_description]\n"
-                + "  FROM [Technology] WHERE tech_id = ?";
+                + "  FROM [Technology_HE151186] WHERE tech_id = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, id);
@@ -59,7 +59,7 @@ public class DAOTechnology extends DBContext {
     }
 
     public void insert(Technology t) {
-        String sql = "INSERT INTO [Technology]\n"
+        String sql = "INSERT INTO [Technology_HE151186]\n"
                 + "           ([tech_id]\n"
                 + "           ,[tech_name]\n"
                 + "           ,[tech_description])\n"
@@ -81,7 +81,7 @@ public class DAOTechnology extends DBContext {
     }
 
     public void update(Technology t) {
-        String sql = "update Technology set tech_name =?, tech_description =? where tech_id=?";
+        String sql = "update Technology_HE151186 set tech_name =?, tech_description =? where tech_id=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, t.getName());
@@ -96,7 +96,7 @@ public class DAOTechnology extends DBContext {
     }
 
     public void delete(String id) {
-        String sql = "delete from Technology where tech_id =?";
+        String sql = "delete from Technology_HE151186 where tech_id =?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, id);

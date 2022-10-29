@@ -17,7 +17,7 @@ public class RoleDAO extends DBContext{
     public ArrayList<Role> getRoles(){
         ArrayList<Role> roles = new ArrayList<>();
         try {
-            String sql = "select r_id,r_name from [Role]";
+            String sql = "select r_id,r_name from [Role_HE151186]";
             PreparedStatement stm = getConnection().prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
@@ -35,7 +35,7 @@ public class RoleDAO extends DBContext{
     }
     public Role getRoles(int id){
         try {
-            String sql = "select r_id,r_name from [Role]\n"
+            String sql = "select r_id,r_name from [Role_HE151186]\n"
                     + "where r_id = ? ";
             PreparedStatement stm = getConnection().prepareStatement(sql);
             stm.setInt(1, id);
@@ -56,7 +56,7 @@ public class RoleDAO extends DBContext{
     
     public void updateAccountRole(int role,int id){
         try {
-            String sql = "UPDATE [Account]\n"
+            String sql = "UPDATE [Account_HE151186]\n"
                     + "   SET [r_id] = ?\n"
                     + " WHERE email = (select email from [User]\n"
                     + "where id = ?)";

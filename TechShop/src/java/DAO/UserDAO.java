@@ -19,7 +19,7 @@ import Model.Account.User;
 public class UserDAO extends DBContext {
 
     public User updateCusInfor(String name, String email, String phone, boolean gender) throws Exception {
-        String sql = "UPDATE [User]\n"
+        String sql = "UPDATE [User_HE151186]\n"
                 + "   SET "
                 + "      [name] = ?\n"
                 + "      ,[gender] = ?\n"
@@ -45,7 +45,7 @@ public class UserDAO extends DBContext {
         ArrayList<User> users = new ArrayList<>();
         try {
             String sql = "select name,gender,email,phone,address,dob,r.r_name\n"
-                    + "from [User] as u JOIN [Role] AS r ON r.r_id = u.r_id  ";
+                    + "from [User_HE151186] as u JOIN [Role_HE151186] AS r ON r.r_id = u.r_id  ";
             PreparedStatement stm = getConnection().prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -72,7 +72,7 @@ public class UserDAO extends DBContext {
     public User getUser(String email) throws Exception {
         String sql = "SELECT u.email, u.name, u.gender, u.phone,\n"
                 + "u.address, u.dob, u.password, r.r_name,r.r_id\n"
-                + "from [User] as u join [Role] as r on u.r_id=r.r_id\n"
+                + "from [User_HE151186] as u join [Role_HE151186] as r on u.r_id=r.r_id\n"
                 + "where email = ? ";
         try {
 
@@ -108,7 +108,7 @@ public class UserDAO extends DBContext {
         if (getUser(c.getEmail()) == null) {
             return null;
         }
-        String sql = "UPDATE [User]\n"
+        String sql = "UPDATE [User_HE151186]\n"
                 + "   SET [name] = ?\n"
                 + "      ,[gender] = ?\n"
                 + "      ,[phone] = ?\n"
@@ -135,42 +135,9 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public User getUser(int id) {
-        try {
-            String sql = "select id,name,gender,u.email,phone,address,dob,a.r_id,r.r_name from [User] AS u join Account as a \n"
-                    + "ON a.email = u.email JOIN [Role] AS r ON r.r_id = a.r_id \n"
-                    + "					where id = ? ";
-            PreparedStatement stm = getConnection().prepareStatement(sql);
-            stm.setInt(1, id);
-            ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                User user = new User();
-                user.setName(rs.getString("name"));
-                user.setGender(rs.getBoolean("gender"));
-                user.setEmail(rs.getString("email"));
-                user.setPhone(rs.getString("phone"));
-                user.setAddress(rs.getString("address"));
-                user.setDob(rs.getDate("dob"));
-                Role r = new Role();
-                r.setId(rs.getInt("r_id"));
-                r.setName(rs.getString("r_name"));
-                user.setRole(r);
-
-                close();
-
-                return user;
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            close();
-        }
-        return null;
-    }
-
     public void insertUser(User user) {
         try {
-            String sql = "INSERT INTO [User]\n"
+            String sql = "INSERT INTO [User_HE151186]\n"
                     + "           ([email]\n"
                     + "           ,[name]\n"
                     + "           ,[gender]\n"
@@ -205,9 +172,9 @@ public class UserDAO extends DBContext {
         }
     }
 
-    public void updateStatusAndRole(String email, int role) {
+    public void updateRole(String email, int role) {
         try {
-            String sql = "UPDATE [User]\n"
+            String sql = "UPDATE [User_HE151186]\n"
                     + "   SET [r_id] = ?\n"
                     + " WHERE email = ?";
             PreparedStatement stm = getConnection().prepareStatement(sql);
@@ -221,27 +188,6 @@ public class UserDAO extends DBContext {
         }
     }
 
-    public void updateUserFromReservationContact(User user) {
-        try {
-            String sql = "UPDATE [User]\n"
-                    + "   SET [name] = ?\n"
-                    + "      ,[gender] = ?\n"
-                    + "      ,[phone] = ?\n"
-                    + "      ,[address] = ?\n"
-                    + " WHERE email = ?";
-            PreparedStatement stm = getConnection().prepareStatement(sql);
-            stm.setString(1, user.getName());
-            stm.setBoolean(2, user.isGender());
-            stm.setString(3, user.getPhone());
-            stm.setString(4, user.getAddress());
-            stm.setString(5, user.getEmail());
-            stm.executeUpdate();
-        } catch (Exception ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
     public ArrayList<User> getAllCustomer(Boolean gender) throws Exception {
         ArrayList<User> customers = new ArrayList<>();
         try {
@@ -251,7 +197,7 @@ public class UserDAO extends DBContext {
                     + "      ,[phone]\n"
                     + "      ,[address]\n"
                     + "      ,[dob]\n"
-                    + "  FROM [User] as u join Role as r on u.r_id=r.r_id\n"
+                    + "  FROM [User_HE151186] as u join Role_HE151186 as r on u.r_id=r.r_id\n"
                     + "  WHERE r.[r_name]='Guest' ";
             if (gender != null) {
                 sql += " AND [gender] = '" + gender + "' ";
@@ -283,7 +229,7 @@ public class UserDAO extends DBContext {
                 + "      ,[phone]\n"
                 + "      ,[address]\n"
                 + "      ,[dob]\n"
-                + "  FROM [User] as u join Role as r on u.r_id=r.r_id\n"
+                + "  FROM [User_HE151186] as u join Role_HE151186 as r on u.r_id=r.r_id\n"
                 + "  WHERE r.[r_name]='Guest' and email like ?";
         try {
             PreparedStatement st = getConnection().prepareStatement(sql);

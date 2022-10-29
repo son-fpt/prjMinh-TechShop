@@ -19,7 +19,7 @@ public class DAOBrand extends DBContext {
         String sql = "SELECT [brand_id]\n"
                 + "      ,[brand_name]\n"
                 + "      ,[brand_description]\n"
-                + "  FROM [Brand]";
+                + "  FROM [Brand_HE151186]";
         try {
             PreparedStatement st = ps(sql);
             ResultSet rs = st.executeQuery();
@@ -38,7 +38,7 @@ public class DAOBrand extends DBContext {
         String sql = "SELECT [brand_id]\n"
                 + "      ,[brand_name]\n"
                 + "      ,[brand_description]\n"
-                + "  FROM [Brand] WHERE brand_id = ?";
+                + "  FROM [Brand_HE151186] WHERE brand_id = ?";
         try {
             PreparedStatement st = ps(sql);
             st.setString(1, id);
@@ -59,7 +59,7 @@ public class DAOBrand extends DBContext {
     }
 
     public void insert(Brand b) {
-        String sql = "INSERT INTO [Brand]\n"
+        String sql = "INSERT INTO [Brand_HE151186]\n"
                 + "           ([brand_id]\n"
                 + "           ,[brand_name]\n"
                 + "           ,[brand_description])\n"
@@ -81,7 +81,7 @@ public class DAOBrand extends DBContext {
     }
 
     public void update(Brand b) {
-        String sql = "update Brand set brand_name =?, brand_description =? where brand_id=?";
+        String sql = "update Brand_HE151186 set brand_name =?, brand_description =? where brand_id=?";
         try {
             PreparedStatement st = ps(sql);
             st.setString(1, b.getName());
@@ -96,7 +96,7 @@ public class DAOBrand extends DBContext {
     }
 
     public void delete(String id) {
-        String sql = "delete from Brand where brand_id =?";
+        String sql = "delete from Brand_HE151186 where brand_id =?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, id);

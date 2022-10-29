@@ -29,7 +29,7 @@ public class DAOProduct extends DBContext {
                 + "      ,[product_description]\n"
                 + "      ,[tech_id]\n"
                 + "      ,[cate_id]\n"
-                + "  FROM [Product]";
+                + "  FROM [Product_HE151186]";
         try {
             PreparedStatement st = ps(sql);
             ResultSet rs = st.executeQuery();
@@ -53,7 +53,7 @@ public class DAOProduct extends DBContext {
     }
 
     public void delete(String id) {
-        String sql = "delete from Product where product_id =?";
+        String sql = "delete from Product_HE151186 where product_id =?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, id);
@@ -67,7 +67,7 @@ public class DAOProduct extends DBContext {
 
     public Product getProById(String id) {
 
-        String sql = "select * from Product where product_id = ? ";
+        String sql = "select * from Product_HE151186 where product_id = ? ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, id);
@@ -94,7 +94,7 @@ public class DAOProduct extends DBContext {
     }
 
     public void insert(Product p) {
-        String sql = "INSERT INTO [Product]\n"
+        String sql = "INSERT INTO [Product_HE151186]\n"
                 + "           ([product_id]\n"
                 + "           ,[product_name]\n"
                 + "           ,[product_image]\n"
@@ -134,7 +134,7 @@ public class DAOProduct extends DBContext {
     }
 
     public void update(Product p) {
-        String sql = "UPDATE [Product]\n"
+        String sql = "UPDATE [Product_HE151186]\n"
                 + "   SET [product_name] = ?\n"
                 + "      ,[product_image] = ?\n"
                 + "      ,[brand_id] = ?\n"
@@ -163,24 +163,6 @@ public class DAOProduct extends DBContext {
         }
     }
 
-    public List<Integer> getSize() {
-        List<Integer> list = new ArrayList<>();
-        String sql = "SELECT DISTINCT product_size FROM Product";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(rs.getInt("product_size"));
-            }
-            return list;
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            close();
-        }
-        return null;
-    }
-
     public List<Product> searchProduct(String bid_raw, String cid_raw, String tid_raw) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT [product_id]\n"
@@ -192,21 +174,29 @@ public class DAOProduct extends DBContext {
                 + "      ,[product_description]\n"
                 + "      ,[tech_id]\n"
                 + "      ,[cate_id]\n"
-                + "FROM [Product]\n";
-        if (bid_raw != "" || cid_raw != "" || tid_raw != "") {
+                + "FROM [Product_HE151186]\n";
+        // 1 trong 3 truong can search ton tai thi them where vao cau lenh
+        if (!"".equals(bid_raw) || !"".equals(cid_raw) || !"".equals(tid_raw)) {
             sql += "WHERE ";
         }
-        if (bid_raw != "") {
+        // neu 1 truong brand ton tai
+        if (!"".equals(bid_raw)) {
             sql += " [brand_id] = '" + bid_raw + "'\n";
         }
-        if (bid_raw != "" && cid_raw != "") {
+        // neu brandd va category ton tai
+        if (!"".equals(bid_raw) && !"".equals(cid_raw)) {
             sql += "AND [cate_id] = '" + cid_raw + "'\n";
-        } else if (bid_raw == "" && cid_raw != "") {
+        }
+        // neu chi category ton tai
+        else if ("".equals(bid_raw) && !"".equals(cid_raw)) {
             sql += " [cate_id] = '" + cid_raw + "'\n";
         }
-        if ((bid_raw != "" || cid_raw != "") && tid_raw != "") {
+        // neu 1 trong 2 truong brand, cate ton tai va truong tech ton tai
+        if ((!"".equals(bid_raw) || !"".equals(cid_raw)) && !"".equals(tid_raw)) {
             sql += "AND [tech_id] = '" + tid_raw + "'";
-        } else if (bid_raw == "" && cid_raw == "" && tid_raw != "") {
+        }
+        // neu chi truong technology ton tai
+        else if ("".equals(bid_raw) && "".equals(cid_raw) && !"".equals(tid_raw)) {
             sql += "[tech_id] = '" + tid_raw + "'";
         }
         try {

@@ -19,7 +19,7 @@ public class DAOCategory extends DBContext {
         String sql = "SELECT [cate_id]\n"
                 + "      ,[cate_name]\n"
                 + "      ,[cate_description]\n"
-                + "  FROM [Category]";
+                + "  FROM [Category_HE151186]";
         try {
             PreparedStatement st = ps(sql);
             ResultSet rs = st.executeQuery();
@@ -38,7 +38,7 @@ public class DAOCategory extends DBContext {
         String sql = "SELECT [cate_id]\n"
                 + "      ,[cate_name]\n"
                 + "      ,[cate_description]\n"
-                + "  FROM [Category] WHERE cate_id = ?";
+                + "  FROM [Category_HE151186] WHERE cate_id = ?";
         try {
             PreparedStatement st = ps(sql);
             st.setString(1, id);
@@ -59,7 +59,7 @@ public class DAOCategory extends DBContext {
     }
 
     public void insert(Category c) {
-        String sql = "INSERT INTO [Category]\n"
+        String sql = "INSERT INTO [Category_HE151186]\n"
                 + "           ([cate_id]\n"
                 + "           ,[cate_name]\n"
                 + "           ,[cate_description])\n"
@@ -81,7 +81,7 @@ public class DAOCategory extends DBContext {
     }
 
     public void update(Category c) {
-        String sql = "update Category set cate_name =?, cate_description =? where cate_id=?";
+        String sql = "update Category_HE151186 set cate_name =?, cate_description =? where cate_id=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, c.getName());
@@ -96,7 +96,7 @@ public class DAOCategory extends DBContext {
     }
 
     public void delete(String id) {
-        String sql = "delete from Category where cate_id =?";
+        String sql = "delete from Category_HE151186 where cate_id =?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, id);

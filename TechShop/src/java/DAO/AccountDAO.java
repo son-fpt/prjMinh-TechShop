@@ -18,8 +18,8 @@ public class AccountDAO extends DAO.DBConnect.DBContext {
     public int getPermission(String username, String url)
     {
         try {
-            String sql = "select count(*) as Total from [User] as u join [Role] as r ON u.r_id = r.r_id join Role_Feature as rf ON rf.r_id = r.r_id\n" +
-                    "join Feature as f ON f.f_id = rf.f_id\n" +
+            String sql = "select count(*) as Total from [User_HE151186] as u join [Role_HE151186] as r ON u.r_id = r.r_id join Role_Feature_HE151186 as rf ON rf.r_id = r.r_id\n" +
+                    "join Feature_HE151186 as f ON f.f_id = rf.f_id\n" +
                     "where u.email = ? and f.url = ?";
             PreparedStatement stm = getConnection().prepareStatement(sql);
             stm.setString(1, username);
@@ -36,7 +36,7 @@ public class AccountDAO extends DAO.DBConnect.DBContext {
     }
     public String getPassword(String email) throws Exception {
         try {
-            String sql = "SELECT password FROM [User] WHERE email = ?";
+            String sql = "SELECT password FROM [User_HE151186] WHERE email = ?";
             PreparedStatement stm = ps(sql);
             stm.setString(1, email);
             ResultSet rs = stm.executeQuery();
@@ -56,7 +56,7 @@ public class AccountDAO extends DAO.DBConnect.DBContext {
     }
 
     public void changePassword(String email, String newPassword) throws Exception {
-        String sql = "UPDATE [User]\n"
+        String sql = "UPDATE [User_HE151186]\n"
                 + "   SET [password] = ?"
                 + "    WHERE email=?";
 
@@ -77,7 +77,7 @@ public class AccountDAO extends DAO.DBConnect.DBContext {
         try {
             String sql = "SELECT  u.[email],u.[name],u.[password]\n"
                     + "      ,u.r_id,r.r_name\n"
-                    + "    FROM [User] u inner join Role r on u.r_id = r.r_id\n"
+                    + "    FROM [User_HE151186] u inner join Role_HE151186 r on u.r_id = r.r_id\n"
                     + "                     WHERE u.email = ? AND u.password = ?";
             PreparedStatement stm = ps(sql);
             stm.setString(1, username);
@@ -105,7 +105,7 @@ public class AccountDAO extends DAO.DBConnect.DBContext {
     }
     
     public void insertAccount(User u) {
-        String sql1 = "INSERT INTO [User]\n"
+        String sql1 = "INSERT INTO [User_HE151186]\n"
                 + "           ([email]\n"
                 + "           ,[name]\n"
                 + "           ,[gender]\n"
@@ -142,7 +142,7 @@ public class AccountDAO extends DAO.DBConnect.DBContext {
 
     public User getEmail(String email) {
         try {
-            String sql = "Select password from [User] WHERE email = ?";
+            String sql = "Select password from [User_HE151186] WHERE email = ?";
             PreparedStatement stm = ps(sql);
             stm.setString(1, email);
             ResultSet rs = stm.executeQuery();
@@ -163,7 +163,7 @@ public class AccountDAO extends DAO.DBConnect.DBContext {
     }
 
     public void updatePass(User a) {
-        String sql = "UPDATE [User]\n"
+        String sql = "UPDATE [User_HE151186]\n"
                 + "   SET [password] = ?\n"
                 + " WHERE email = ?";
 
