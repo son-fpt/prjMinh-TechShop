@@ -26,7 +26,8 @@
                                     <div class="col-lg-8">
                                         <div class="page-header-title">
                                             <div class="d-inline">
-                                                <h4>Product Detail</h4>
+                                                <h4 style="margin-left: 350px">Product Detail</h4>
+
                                             </div>
                                         </div>
                                     </div>
@@ -36,72 +37,71 @@
                             <!-- Page body start -->
                             <div class="page-body">
 
-                                <div class="row">
+                                <div class="row" >
                                     <div class="col-sm-12">
                                         <!-- Responsive integration table start -->
                                         <div class="card">
                                             <div class="card-block">
-                                                <div class="row">
+                                                <div class="row" style="margin-bottom: 70px">  
+                                                    <div class="col-3">
+                                                    </div>
                                                     <div class="col-6">
-                                                        <img src="${requestScope.product.image}" alt="alt"/>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <div>
-                                                        <label>Name</label>
-                                                        <div>${requestScope.product.name}</div>
+                                                        <a href="home"> <button class="btn btn-primary waves-effect waves-light">BACK</button></a>
+
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <img src="${requestScope.product.image}" alt="alt"/>
+                                                        </div>
                                                     </div>
-                                                    <div>
-                                                        <label>
-                                                            Brand
-                                                        </label>
-                                                        <div>${requestScope.product.brand.name}</div>
-                                                    </div>
-                                                    <div>
-                                                        <label>Size</label>
-                                                        <div>${requestScope.product.size}</div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
-                                                    <div>
-                                                        <label>Category</label>
-                                                        <div>${requestScope.product.cate.name}</div>
-                                                    </div>
-                                                    <div>
-                                                        <label>Technology</label>
-                                                        <div>${requestScope.product.tech.name}</div>
-                                                    </div>
-                                                    <div>
-                                                        <label>Price</label>
-                                                        <div>${requestScope.product.price}</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-6"></div>
-                                                <label>Description</label>
-                                                <div>${requestScope.product.des}</div>
-                                            </div>    
-                                            <div class="row">
-                                                <div class="col-6">
                                                     <div class="row">
-                                                        <button class="btn btn-primary waves-effect waves-light">Add to card</button>
+                                                        <div class="col-6">
+                                                            <div>
+                                                                <label>Name</label>
+                                                                <div>${requestScope.product.name}</div>
+                                                            </div>
+                                                            <div>
+                                                                <label>
+                                                                    Brand
+                                                                </label>
+                                                                <div>${requestScope.product.brand.name}</div>
+                                                            </div>
+                                                            <div>
+                                                                <label>Size</label>
+                                                                <div>${requestScope.product.size}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div>
+                                                                <label>Category</label>
+                                                                <div>${requestScope.product.cate.name}</div>
+                                                            </div>
+                                                            <div>
+                                                                <label>Technology</label>
+                                                                <div>${requestScope.product.tech.name}</div>
+                                                            </div>
+                                                            <div>
+                                                                <label>Price</label>
+                                                                <div>${requestScope.product.price}</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                   
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label>Description</label>
+                                                            <div>${requestScope.product.des}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="row">
+                                                                <button class="btn btn-primary waves-effect waves-light">Add to card</button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
+
                                             </div>
-                                            <!--                                                <div class="dt-responsive table-responsive">
-                                                                                                <form method="GET" action="productdetail">
-                                                                                                    <table id="responsive-reorder" class="table table-striped table-bordered nowrap">
-                                                                                                        <tbody>
-                                                                                                            <tr>
-                                                                                                                
-                                                                                                            </tr>
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                </form>
-                                                                                            </div>-->
                                         </div>
                                     </div>
                                     <!-- Responsive integration table end -->

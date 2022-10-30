@@ -5,6 +5,15 @@
         function homeSubmit() {
             document.getElementById("hi").submit();
         }
+        ;
+        function Showtable() {
+            var click = document.getElementById('mydiv');
+            if (click.style.display == 'block') {
+                document.getElementById('mydiv').style.display = 'none';
+            } else {
+                document.getElementById('mydiv').style.display = 'block';
+            }
+        }
     </script>
     <!-- Hero Start -->
     <div class="container-fluid bg-primary py-5 hero-header mb-5">
@@ -123,6 +132,26 @@
                                     </div>
                                 </div>
                             </a>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <button onclick="Showtable()" class="btn btn-primary waves-effect waves-light">Add to card</button>
+                                <div id="mydiv">
+                                    <form action="addcard" method="GET">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" name="id" value="${p.id}"/>
+                                                    <input type="number" name="quantity" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button type="submit">Submit</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>

@@ -38,8 +38,8 @@ public class SendEmail {
     public static int randomNumber(int min, int max) {
         return generator.nextInt((max - min) + 1) + min;
     }
-    private String User = "sonnkhe151341@fpt.edu.vn";
-    private String Pass = "kson(2805)";
+    private String User = "minhtnhe151186@fpt.edu.vn";
+    private String Pass = "";
 
     public String getUser() {
         return User;

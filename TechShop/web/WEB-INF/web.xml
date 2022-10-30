@@ -48,6 +48,10 @@
         <servlet-name>ProductDetail</servlet-name>
         <servlet-class>Control.Homepage.ProductDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddToCard</servlet-name>
+        <servlet-class>Control.Card.AddToCard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Homepage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -83,6 +87,10 @@
     <servlet-mapping>
         <servlet-name>ProductDetail</servlet-name>
         <url-pattern>/productdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCard</servlet-name>
+        <url-pattern>/addcard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
