@@ -29,6 +29,8 @@ public class OrderDetailDAO extends DBContext {
                 OrderDetail od = new OrderDetail();
                 od.setOid(oid);
                 od.setPid(rs.getString("product_id"));
+                DAOProduct p = new DAOProduct();
+                od.setP(p.getProById(od.getPid()));
                 od.setPrice(rs.getDouble("price"));
                 od.setQuantity(rs.getInt("quantity"));
                 orders.add(od);
@@ -56,6 +58,7 @@ public class OrderDetailDAO extends DBContext {
             ps.setString(2, od.getPid());
             ps.setInt(3, od.getQuantity());
             ps.setDouble(4, od.getPrice());
+            System.out.println(sql);
             ps.executeUpdate();
         } catch (Exception ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);

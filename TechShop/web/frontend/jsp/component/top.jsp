@@ -52,18 +52,13 @@
             <div class="navbar-nav ms-auto py-0">
 
                 <a href="${pageContext.request.contextPath}/home" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("home.jsp")?'active':''}">Home</a>
-                <a href="${pageContext.request.contextPath}/slide" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("Slide")?'active':''}">News</a>
                 <c:if test="${sessionScope.account ne null && sessionScope.account.role.id==3}">
                     <a href="${pageContext.request.contextPath}/Reservation" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("Reservation")?'active':''}">Cart</a>
-                    <a href="${pageContext.request.contextPath}/myorder/list" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("myorder")?'active':''}">Order</a>
-                    <a href="${pageContext.request.contextPath}/feedback/list" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("feedback")?'active':''}">FeedBack</a>
+                    <a href="${pageContext.request.contextPath}/myorderlist" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("myorderlist")?'active':''}">Order</a>
                 </c:if>
                 <c:if test="${sessionScope.account.role.id == 1}">
-                    <a href="${pageContext.request.contextPath}/user/list" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("user")?'active':''}">Administrator</a>
-                </c:if>
-                <c:if test="${sessionScope.account.role.id == 4}">
-                    <a href="${pageContext.request.contextPath}/manager/desk" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("manager/desk")?'active':''}">Manager Desk</a>
-                </c:if>  
+                    <a href="${pageContext.request.contextPath}/product/list" class="nav-item nav-link ${pageContext.request.getRequestURI().contains("product/list")?'active':''}">Administrator</a>
+                </c:if> 
             </div>
 
 
@@ -81,18 +76,12 @@
                     </button>
 
                     <ul class="dropdown-menu row" aria-labelledby="userProfile">
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/profile""><i class="bi bi-person-circle"></i> Profile</a></li>
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/changePassword"><i class="bi bi-key"></i> Change Password</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><i class="bi bi-key"></i>Logout</a></li>
                     </ul>
 
                 </div>
-                <c:if test="${sessionScope.account.role.id == 1}">
-                    <a href="${pageContext.request.contextPath}/slideController" class="btn btn-danger py-2 px-4 ms-3">Administration</a>     
-                </c:if>
-                <c:if test="${sessionScope.account.role.id == 2}">
-                    <a href="${pageContext.request.contextPath}/manager/postslist" class="btn btn-danger py-2 px-4 ms-3">Manager board</a>     
-                </c:if>
-                <a href="${pageContext.request.contextPath}/logout" class="btn btn-primary py-2 px-4 ms-3">Logout</a>
+                
             </c:if>
 
 

@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class=" ">
-                    <a href="${pageContext.request.contextPath}/slideController">
+                    <a href="${pageContext.request.contextPath}/product/list">
                         <span class="pcoded-micon"><i class="feather icon-aperture rotate-refresh"></i></span>
                         <span class="pcoded-mtext">Sliders List</span>
                     </a>

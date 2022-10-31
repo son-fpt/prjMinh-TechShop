@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/web/frontend/jsp/host/editproduct.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/src/java/Control/Homepage/Homepage.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/web/frontend/jsp/host/listproduct.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/src/java/Control/Admin/UserList.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/src/java/Control/Card/AddToCard.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/web/frontend/jsp/component/top.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/src/java/Model/Product/Product.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/web/frontend/jsp/host/addproduct.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/prjMinh-TechShop/TechShop/src/java/Control/Admin/ProductList.java</file>
+        </group>
     </open-files>
 </project-private>

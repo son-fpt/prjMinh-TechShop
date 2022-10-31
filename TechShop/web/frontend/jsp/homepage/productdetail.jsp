@@ -94,7 +94,11 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="row">
-                                                                <button class="btn btn-primary waves-effect waves-light">Add to card</button>
+                                                                <form action="addcard" method="GET">
+                                                                    <input type="hidden" name="id" value="${requestScope.product.id}"/>
+                                                                    Quantity: <input type="number" name="quantity" value="1"/>
+                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light">Add to card</button>
+                                                                </form>
                                                             </div>
 
                                                         </div>

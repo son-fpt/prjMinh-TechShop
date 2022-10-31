@@ -52,6 +52,26 @@
         <servlet-name>AddToCard</servlet-name>
         <servlet-class>Control.Card.AddToCard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewTotalCard</servlet-name>
+        <servlet-class>Control.Card.ViewTotalCard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AllOrder</servlet-name>
+        <servlet-class>Control.Card.AllOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Pay</servlet-name>
+        <servlet-class>Control.Card.Pay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductList</servlet-name>
+        <servlet-class>Control.Admin.ProductList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserList</servlet-name>
+        <servlet-class>Control.Admin.UserList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Homepage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -91,6 +111,26 @@
     <servlet-mapping>
         <servlet-name>AddToCard</servlet-name>
         <url-pattern>/addcard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewTotalCard</servlet-name>
+        <url-pattern>/Reservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllOrder</servlet-name>
+        <url-pattern>/myorderlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Pay</servlet-name>
+        <url-pattern>/Pay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductList</servlet-name>
+        <url-pattern>/product/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserList</servlet-name>
+        <url-pattern>/user/list</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

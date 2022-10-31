@@ -5,12 +5,23 @@
  */
 package Model.Order;
 
+import Model.Product.Product;
+
 
 public class OrderDetail {
     private int oid;
     private String pid;
     private int quantity;
     private double price;
+    private Product p;
+
+    public Product getP() {
+        return p;
+    }
+
+    public void setP(Product p) {
+        this.p = p;
+    }
 
     public OrderDetail() {
     }
@@ -53,4 +64,14 @@ public class OrderDetail {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "oid:"+oid+"\n"+
+                "pid:"+pid+"\n"+
+                "quantity:"+quantity+"\n"+
+                "price:"+price+"\n"; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
 }

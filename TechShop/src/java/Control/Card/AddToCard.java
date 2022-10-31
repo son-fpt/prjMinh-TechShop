@@ -27,7 +27,7 @@ import java.util.Date;
  */
 public class AddToCard extends HttpServlet {
 
-    private SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+    private final SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,42 +42,74 @@ public class AddToCard extends HttpServlet {
             throws ServletException, IOException {
         HttpSession hs = request.getSession();
         User user = (User) hs.getAttribute("account");
+
         if (user != null && (user.getRole().getName().equals("Guest") || user.getRole().getName().equals("Admin"))) {
             String pid = request.getParameter("id");
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            System.out.println(pid);
-            System.out.println(quantity);
+            String quantity_raw = request.getParameter("quantity");
+            
+            quantity_raw = (quantity_raw == null || quantity_raw.length() == 0) ? "1" : quantity_raw;
+            int quantity = Integer.parseInt(quantity_raw);
+            
             DAOProduct p = new DAOProduct();
             OrderDAO o = new OrderDAO();
             OrderDetailDAO od = new OrderDetailDAO();
             Product product = p.getProById(pid);
-            // when today is not have any order, create new order and order detail
+            Order order = new Order();
+            OrderDetail orde = new OrderDetail();
             ArrayList<Order> listOrder = o.getOrderByUser(user.getEmail());
-            for (Order ord : listOrder) {
-                if (!f.format(ord.getDate()).equals(f.format(new Date()))) {
-                    Order order = new Order();
-                    order.setMail(user.getEmail());
-                    order.setOid(listOrder.size() + 1);
-                    o.InsertOrder(order);
-                    // create new order detail
-                    OrderDetail orde = new OrderDetail();
-                    orde.setOid(order.getOid());
-                    orde.setPid(pid);
-                    orde.setPrice(product.getPrice());
-                    orde.setQuantity(quantity);
-                    od.InsertOD(orde);
-                    break;
-                } else {
-                    // create new order detail
-                    OrderDetail orde = new OrderDetail();
-                    orde.setOid(listOrder.size());
-                    orde.setPid(pid);
-                    orde.setPrice(product.getPrice());
-                    orde.setQuantity(quantity);
-                    od.InsertOD(orde);
-                    break;
+            
+            
+            if (listOrder.isEmpty()) {
+                // set trước một số thuộc tính của order detail để add luôn vào thuộc tính price ở order
+                orde.setPid(pid);
+                orde.setPrice(product.getPrice());
+                orde.setQuantity(quantity);
+                double total = orde.getPrice() * orde.getQuantity();
+                
+                order.setTotalmoney(total);
+                order.setMail(user.getEmail());
+                order.setStatus(false);
+                // add order moi khi list order trống
+                o.InsertOrder(order);
+                // load lai list order trong trương hop list trống ban dau
+                listOrder = o.getOrderByUser(user.getEmail());
+                // set id theo order vua them o tren
+                orde.setOid(listOrder.get(listOrder.size() - 1).getOid());
+                // add order detail 
+                od.InsertOD(orde);
+            } else {
+                for (Order ord : listOrder) {
+                    if (!f.format(ord.getDate()).equals(f.format(new Date()))) {
+                        order.setMail(user.getEmail());
+                        // create new order detail
+                        orde.setOid(listOrder.get(listOrder.size() - 1).getOid() + 1);
+                        orde.setPid(pid);
+                        orde.setPrice(product.getPrice());
+                        orde.setQuantity(quantity);
+                        double total = orde.getPrice() * orde.getQuantity();
+                        order.setTotalmoney(total);
+                        order.setStatus(false);
+                        o.InsertOrder(order);
+                        od.InsertOD(orde);
+                        break;
+                    } else {
+                        // create new order detail
+                        orde.setOid(listOrder.get(listOrder.size() - 1).getOid());
+                        orde.setPid(pid);
+                        orde.setPrice(product.getPrice());
+                        orde.setQuantity(quantity);
+                        System.out.println(orde.toString());
+                        double total = orde.getPrice() * orde.getQuantity();
+                        Order getLast = listOrder.get(listOrder.size() - 1);
+                        getLast.setTotalmoney(total);
+                        o.UpdateTotalprice(getLast.getTotalmoney(), getLast.getOid());
+                        od.InsertOD(orde);
+                        break;
+                    }
                 }
             }
+
+            response.sendRedirect("home");
         } else {
             response.getWriter().println("Please login to order!");
         }
