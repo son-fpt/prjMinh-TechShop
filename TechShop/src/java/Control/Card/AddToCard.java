@@ -53,6 +53,7 @@ public class AddToCard extends HttpServlet {
             DAOProduct p = new DAOProduct();
             OrderDAO o = new OrderDAO();
             OrderDetailDAO od = new OrderDetailDAO();
+            
             Product product = p.getProById(pid);
             Order order = new Order();
             OrderDetail orde = new OrderDetail();

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : mlist
-    Created on : Jun 22, 2022, 4:58:54 PM
-    Author     : Administrator
---%>
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -55,24 +51,6 @@
                 }
             }
         </script>
-        <style>
-            .checked {
-                color: orange;
-            }
-            .sort-grid{
-                display: grid;
-                grid-template-columns: 100px 100px 100px 100px;
-                grid-template-rows:  100px;
-            }
-            .sort1{
-                grid-column: 1/2;
-                grid-row: 1/2;
-            }
-            .sort2{
-                grid-column: 2/3;
-                grid-row: 1/2;
-            }
-        </style>
     </head>
     <body>
         <!-- Pre-loader start -->
@@ -221,7 +199,7 @@
                                                     <!-- List view card start -->
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <a href="add" class="btn btn-primary">Add Product</a>
+                                                            <a href="add" class="btn btn-primary">List Product</a>
                                                         </div>
                                                         <div class="row card-block">
                                                             <div class="col-md-12">
