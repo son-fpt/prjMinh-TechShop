@@ -1,13 +1,10 @@
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title> Admin - Nhat Minh Store </title>
-        <!-- Meta -->
+        <title> Manager - Children Care </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,19 +25,19 @@
         <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\assets\icon\feather\css\feather.css">
         <!-- Data Table Css -->
         <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css">
-        <link rel="stylesheet" type="text/css" href="..\frontend\assert\assets\pages\data-table\css\buttons.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\assets\pages\data-table\css\buttons.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\bower_components\datatables.net-responsive-bs4\css\responsive.bootstrap4.min.css">
+
+        <!-- Select 2 css -->
+        <link rel="stylesheet" href="..\frontend\assert\libAdmin\bower_components\select2\css\select2.min.css">
+        <!-- Multi Select css -->
+        <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\bower_components\bootstrap-multiselect\css\bootstrap-multiselect.css">
+        <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\bower_components\multiselect\css\multi-select.css">
 
         <!-- Style.css -->
         <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\assets\css\style.css">
         <link rel="stylesheet" type="text/css" href="..\frontend\assert\libAdmin\assets\css\jquery.mCustomScrollbar.css">
-        <link rel="stylesheet" href="..\frontend\assert\libAdmin\assets\scss\partials\menu\_pcmenu.htm">
-        <!-- JS Pager -->
-        <script src="../frontend/assert/libAdmin/assets/js/pager.js" type="text/javascript"></script>
-        <!-- Style Pager -->
-        <link href="../frontend/assert/libAdmin/assets/css/pagerstyle.css" rel="stylesheet" type="text/css"/>
-        <!-- Font Awesome Icon Library -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     </head>
     <body>
         <!-- Pre-loader start -->
@@ -92,7 +89,7 @@
                             <a class="mobile-menu" id="mobile-collapse" href="#!">
                                 <i class="feather icon-menu"></i>
                             </a>
-                            <a href="../home">
+                            <a href="index-1.htm">
                                 <img class="img-fluid" src="..\frontend\assert\libAdmin\assets\images\logo.png" alt="Theme-Logo">
 
                             </a>
@@ -132,23 +129,23 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="user-profile.htm">
+                                                <a href="#">
                                                     <i class="feather icon-user"></i> Profile
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="auth-normal-sign-in.htm">
+                                                <a href="../logout">
                                                     <i class="feather icon-log-out"></i> Logout
                                                 </a>
                                             </li>
                                         </ul>
+
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
-
 
                 <div class="pcoded-main-container">
                     <div class="pcoded-wrapper">
@@ -164,7 +161,7 @@
                                                     <div class="col-lg-8">
                                                         <div class="page-header-title">
                                                             <div class="d-inline">
-                                                                <h4>Product Manager</h4>
+                                                                <h4>User Manager</h4>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -172,7 +169,7 @@
                                                         <div class="page-header-breadcrumb">
                                                             <ul class="breadcrumb-title">
                                                                 <li class="breadcrumb-item">
-                                                                    <a href="#"> <i class="feather icon-home"></i> </a>
+                                                                    <a href="index-1.htm"> <i class="feather icon-home"></i> </a>
                                                                 </li>
                                                                 <li class="breadcrumb-item"><a href="#!">Widget</a> </li>
                                                             </ul>
@@ -181,109 +178,74 @@
                                                 </div>
                                             </div>
                                             <!-- Page-header end -->
-                                            <!-- Page body start -->
                                             <div class="page-body">
 
-                                                <div class="row">
-                                                    <div class="col-sm-12">
-                                                        <!-- List view card start -->
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                <a href="add" class="btn btn-primary">Add Product</a>
-                                                            </div>
-                                                            <div class="row card-block">
-                                                                <div class="col-md-12">
-                                                                    <form action="add" method="POST" enctype="multipart/form-data">
-                                                                        <div class="form-group row">
-                                                                            <label class="col-sm-2 col-form-label">Category</label>
-                                                                            <div class="col-sm-10">
-                                                                                <select name="cate" class="form-control">
-                                                                                <c:forEach items="${requestScope.listCategory}" var="c">
-                                                                                    <option value="${c.id}">${c.name}</option>
-                                                                                </c:forEach>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Brand</label>
-                                                                        <div class="col-sm-10">
-                                                                            <select name="brand" class="form-control">
-                                                                                <c:forEach items="${requestScope.listBrand}" var="b">
-                                                                                    <option value="${b.id}">${b.name}</option>
-                                                                                </c:forEach>
-                                                                            </select>                                                                  
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Technology</label>
-                                                                        <div class="col-sm-10">
-                                                                            <select name="tech" class="form-control">
-                                                                                <c:forEach items="${requestScope.listTech}" var="t">
-                                                                                    <option value="${t.id}">${t.name}</option>
-                                                                                </c:forEach>
-                                                                            </select>                                                                  
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Product ID</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="text" name="pid" class="form-control" placeholder="Type product id" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Product Name</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="text" name="pname" class="form-control" placeholder="Type product name" required/>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Size</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="number" name="size" class="form-control" placeholder="Type product size" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Price</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="number" name="price" class="form-control" placeholder="Type product price" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Upload Image</label>
-                                                                        <div class="col-sm-10">
-                                                                            <input type="file" name="image" class="form-control" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                        <div class="form-group row">
-                                                                        <label class="col-sm-2 col-form-label">Product Description</label>
-                                                                        <div class="col-sm-10">
-                                                                            <textarea class="col-sm-2 col-form-label" name="des"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                    
-                                                                    <input type="submit" class="btn btn-primary waves-effect waves-light" value="Submit">
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        List User
                                                     </div>
-                                                    <!-- List view card end -->
+                                                    <div class="card-block">
+                                                        <div class="table-responsive dt-responsive">
+                                                            <table id="setting-default" class="table table-striped table-bordered nowrap">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th></th>
+                                                                        <th>Name</th>
+                                                                        <th>Gender</th>
+                                                                        <th>email</th>
+                                                                        <th>Phone</th>
+                                                                        <th>Address</th>
+                                                                        <th>Date Of Birth</th>
+                                                                        <th>Password</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <c:forEach items="${requestScope.list}" var="se">
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>${se.name}</td>
+                                                                        <td>${se.gender}</td>
+                                                                        <td>${se.email}</td>
+                                                                        <td>${se.phone}</td>
+                                                                        <td>${se.address}</td>
+                                                                        <td><fmt:formatDate type = "date" value = "${se.dob}"/></td>
+                                                                        <td>${se.password}</td>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <a href="delete?id=${se.email}">
+                                                                                <button class="btn btn-danger">Delete</button>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:forEach>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th>Name</th>
+                                                                    <th>Gender</th>
+                                                                    <th>email</th>
+                                                                    <th>Phone</th>
+                                                                    <th>Address</th>
+                                                                    <th>Date Of Birth</th>
+                                                                    <th>Password</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Page-body end -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="styleSelector">
-
-                        </div>
                     </div>
                 </div>
             </div>
-        </div> 
-
+        </div>
         <!-- Required Jquery -->
         <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\jquery\js\jquery.min.js"></script>
         <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\jquery-ui\js\jquery-ui.min.js"></script>
@@ -295,43 +257,42 @@
         <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\modernizr\js\modernizr.js"></script>
         <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\modernizr\js\css-scrollbars.js"></script>
 
-        <!-- i18next.min.js -->
-        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\i18next\js\i18next.min.js"></script>
-        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\i18next-xhr-backend\js\i18nextXHRBackend.min.js"></script>
-        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\i18next-browser-languagedetector\js\i18nextBrowserLanguageDetector.min.js"></script>
-        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\jquery-i18next\js\jquery-i18next.min.js"></script>
-        <script src="..\frontend\assert\libAdmin\assets\js\pcoded.min.js"></script>
-        <script src="..\frontend\assert\libAdmin\assets\js\vartical-layout.min.js"></script>
-        <script src="..\frontend\assert\libAdmin\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
-        <!-- Custom js -->
-
-        <script type="text/javascript" src="..\frontend\assert\libAdmin\assets\js\script.js"></script>
         <!-- data-table js -->
         <script src="..\frontend\assert\libAdmin\bower_components\datatables.net\js\jquery.dataTables.min.js"></script>
         <script src="..\frontend\assert\libAdmin\bower_components\datatables.net-buttons\js\dataTables.buttons.min.js"></script>
-        <script src="..\frontend\assert\assets\pages\data-table\js\jszip.min.js"></script>
-        <script src="..\frontend\assert\assets\pages\data-table\js\pdfmake.min.js"></script>
-        <script src="..\frontend\assert\assets\pages\data-table\js\vfs_fonts.js"></script>
+        <script src="..\frontend\assert\libAdmin\assets\pages\data-table\js\jszip.min.js"></script>
+        <script src="..\frontend\assert\libAdmin\assets\pages\data-table\js\pdfmake.min.js"></script>
+        <script src="..\frontend\assert\libAdmin\assets\pages\data-table\js\vfs_fonts.js"></script>
         <script src="..\frontend\assert\libAdmin\bower_components\datatables.net-buttons\js\buttons.print.min.js"></script>
         <script src="..\frontend\assert\libAdmin\bower_components\datatables.net-buttons\js\buttons.html5.min.js"></script>
         <script src="..\frontend\assert\libAdmin\bower_components\datatables.net-bs4\js\dataTables.bootstrap4.min.js"></script>
         <script src="..\frontend\assert\libAdmin\bower_components\datatables.net-responsive\js\dataTables.responsive.min.js"></script>
         <script src="..\frontend\assert\libAdmin\bower_components\datatables.net-responsive-bs4\js\responsive.bootstrap4.min.js"></script>
+        <!-- i18next.min.js -->
+        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\i18next\js\i18next.min.js"></script>
+        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\i18next-xhr-backend\js\i18nextXHRBackend.min.js"></script>
+        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\i18next-browser-languagedetector\js\i18nextBrowserLanguageDetector.min.js"></script>
+        <script type="text/javascript" src="..\frontend\assert\libAdmin\bower_components\jquery-i18next\js\jquery-i18next.min.js"></script>
+        <!-- Custom js -->
+        <script src="..\frontend\assert\libAdmin\assets\pages\data-table\js\data-table-custom.js"></script>
 
-        <!-- modernizr js -->
+        <script src="..\frontend\assert\libAdmin\assets\js\pcoded.min.js"></script>
+        <script src="..\frontend\assert\libAdmin\assets\js\vartical-layout.min.js"></script>
+        <script src="..\frontend\assert\libAdmin\assets\js\jquery.mCustomScrollbar.concat.min.js"></script>
+        <script type="text/javascript" src="..\frontend\assert\libAdmin\assets\js\script.js"></script>
+
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
         <script>
+                                window.dataLayer = window.dataLayer || [];
+                                function gtag() {
+                                    dataLayer.push(arguments);
+                                }
+                                gtag('js', new Date());
 
-                                        window.dataLayer = window.dataLayer || [];
-
-                                        function gtag() {
-                                            dataLayer.push(arguments);
-                                        }
-                                        gtag('js', new Date());
-
-                                        gtag('config', 'UA-23581568-13');
-
+                                gtag('config', 'UA-23581568-13');
         </script>
     </body>
+
 </html>
+

@@ -4,23 +4,22 @@
  */
 package Control.Admin;
 
-import DAO.DAOProduct;
-import Model.Account.User;
-import Model.Product.Product;
+import DAO.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author Administrator
  */
-public class ProductList extends HttpServlet {
+public class DeleteUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,19 +32,14 @@ public class ProductList extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession hs = request.getSession();
-        User user = (User) hs.getAttribute("account");
-        
-        if (user != null && user.getRole().getName().equals("Admin")) {
-            DAOProduct p = new DAOProduct();
-            List<Product> all = p.getAll();
-            request.setAttribute("account", user);
-            request.setAttribute("all", all);
-            request.getRequestDispatcher("../frontend/jsp/host/listproduct.jsp").forward(request, response);
-        } else {
-            response.getWriter().println("Access Denied!");
+        try {
+            String id = request.getParameter("id");
+            UserDAO udao = new UserDAO();
+            udao.delete(id);
+            response.sendRedirect("list");
+        } catch (Exception ex) {
+            Logger.getLogger(DeleteUser.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
 
     /**

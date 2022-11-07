@@ -18,6 +18,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Homepage extends HttpServlet {
 
@@ -45,21 +46,26 @@ public class Homepage extends HttpServlet {
         String bid_raw = request.getParameter("bid");
         String cid_raw = request.getParameter("cid");
         String tid_raw = request.getParameter("tid");
-
+        String size_raw = request.getParameter("size");
+        
         bid_raw = (bid_raw == null || bid_raw.length() == 0) ? "" : bid_raw;
         cid_raw = (cid_raw == null || cid_raw.length() == 0) ? "" : cid_raw;
         tid_raw = (tid_raw == null || tid_raw.length() == 0) ? "" : tid_raw;
+        size_raw = (size_raw == null || size_raw.length() == 0) ? "0" : size_raw;
 
-        // search by brand, category, technology
+        int size = Integer.parseInt(size_raw);
         products = p.searchProduct(bid_raw, cid_raw, tid_raw);
 
         //get search string from client and filter product list by product name
         String searchContent = request.getParameter("searchContent");
-
-        if (searchContent != null) {
-            products.removeIf(s -> (!s.getName().toLowerCase().contains(searchContent)));
+        
+        if (size != 0) {
+            products.removeIf(s -> (!(s.getSize() == size)));
         }
-
+        if (searchContent != null) {
+            products.removeIf(s -> (!s.getName().toLowerCase().contains(searchContent.toLowerCase())));
+        }
+        
         //paginating
         String pageNow_raw = request.getParameter("page");
         int pageNow;
@@ -76,7 +82,6 @@ public class Homepage extends HttpServlet {
         int End = productPerPage * pageNow - 1;
         int Start = End + 1 - productPerPage;
 
-        
         //set attribute
         request.setAttribute("searchContent", searchContent);
 

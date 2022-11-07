@@ -15,59 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import Model.Account.User;
+import Model.Order.Order;
 
 public class UserDAO extends DBContext {
-
-    public User updateCusInfor(String name, String email, String phone, boolean gender) throws Exception {
-        String sql = "UPDATE [User_HE151186]\n"
-                + "   SET "
-                + "      [name] = ?\n"
-                + "      ,[gender] = ?\n"
-                + "      ,[phone] = ?\n"
-                + " WHERE [email] = ?";
-        try {
-            PreparedStatement st = getConnection().prepareStatement(sql);
-            st.setString(4, email);
-            st.setString(1, name);
-            st.setBoolean(2, gender);
-            st.setString(3, phone);
-            st.executeUpdate();
-            return getUser(email);
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            close();
-        }
-        return null;
-    }
-
-    public ArrayList<User> getUsers() throws Exception {
-        ArrayList<User> users = new ArrayList<>();
-        try {
-            String sql = "select name,gender,email,phone,address,dob,r.r_name\n"
-                    + "from [User_HE151186] as u JOIN [Role_HE151186] AS r ON r.r_id = u.r_id  ";
-            PreparedStatement stm = getConnection().prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                User user = new User();
-                user.setName(rs.getString("name"));
-                user.setGender(rs.getBoolean("gender"));
-                user.setEmail(rs.getString("email"));
-                user.setPhone(rs.getString("phone"));
-                user.setAddress(rs.getString("address"));
-                user.setDob(rs.getDate("dob"));
-                Role r = new Role();
-                r.setName(rs.getString("r_name"));
-                user.setRole(r);
-                users.add(user);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            close();
-        }
-        return users;
-    }
 
     public User getUser(String email) throws Exception {
         String sql = "SELECT u.email, u.name, u.gender, u.phone,\n"
@@ -135,60 +85,7 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public void insertUser(User user) {
-        try {
-            String sql = "INSERT INTO [User_HE151186]\n"
-                    + "           ([email]\n"
-                    + "           ,[name]\n"
-                    + "           ,[gender]\n"
-                    + "           ,[phone]\n"
-                    + "           ,[address]\n"
-                    + "           ,[dob]\n"
-                    + "           ,[password]\n"
-                    + "           ,[r_id])\n"
-                    + "     VALUES\n"
-                    + "           (?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?\n"
-                    + "           ,?)";
-            PreparedStatement stm = getConnection().prepareStatement(sql);
-            stm.setString(1, user.getEmail());
-            stm.setString(2, user.getName());
-            stm.setBoolean(3, user.isGender());
-            stm.setString(4, user.getPhone());
-            stm.setString(5, user.getAddress());
-            stm.setDate(6, user.getDob());
-            stm.setString(7, user.getPassword());
-            stm.setInt(8, user.getRole().getId());
-            stm.executeUpdate();
-        } catch (Exception ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            close();
-        }
-    }
-
-    public void updateRole(String email, int role) {
-        try {
-            String sql = "UPDATE [User_HE151186]\n"
-                    + "   SET [r_id] = ?\n"
-                    + " WHERE email = ?";
-            PreparedStatement stm = getConnection().prepareStatement(sql);
-            stm.setInt(1, role);
-            stm.setString(2, email);
-            stm.executeUpdate();
-        } catch (Exception ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            close();
-        }
-    }
-
-    public ArrayList<User> getAllCustomer(Boolean gender) throws Exception {
+    public ArrayList<User> getAllCustomer() throws Exception {
         ArrayList<User> customers = new ArrayList<>();
         try {
             String sql = "SELECT [email]\n"
@@ -197,11 +94,9 @@ public class UserDAO extends DBContext {
                     + "      ,[phone]\n"
                     + "      ,[address]\n"
                     + "      ,[dob]\n"
+                    + "      ,[password]\n"
                     + "  FROM [User_HE151186] as u join Role_HE151186 as r on u.r_id=r.r_id\n"
                     + "  WHERE r.[r_name]='Guest' ";
-            if (gender != null) {
-                sql += " AND [gender] = '" + gender + "' ";
-            }
             PreparedStatement ps = getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -212,6 +107,7 @@ public class UserDAO extends DBContext {
                 user.setPhone(rs.getString("phone"));
                 user.setAddress(rs.getString("address"));
                 user.setDob(rs.getDate("dob"));
+                user.setPassword(rs.getString("password"));
                 customers.add(user);
             }
         } catch (SQLException ex) {
@@ -252,6 +148,28 @@ public class UserDAO extends DBContext {
             close();
         }
         return null;
+    }
+
+    public void delete(String email) throws Exception {
+        if (getUser(email) == null) {
+        } else {
+            OrderDAO odao = new OrderDAO();
+            ArrayList<Order> list = odao.getOrderByUser(email);
+            for (Order order : list) {
+                odao.deleteOrder(order.getOid());
+            }
+            String sql = "DELETE FROM [User_HE151186]\n"
+                    + "      WHERE email = ? ";
+            try {
+                PreparedStatement st = ps(sql);
+                st.setString(1, email);
+                st.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                close();
+            }
+        }
     }
 
 }

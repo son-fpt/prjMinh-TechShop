@@ -86,11 +86,31 @@
                     </select>
                 </div>
                 <div class="col-lg-3">
+                    <select class="form-select p-2" name="size" onchange="homeSubmit()">
+                        <option value="0">
+                            All Size
+                        </option>
+                        <c:forEach items="${requestScope.products}" var="s">
+                            <c:if test="${requestScope.size eq s.size}">
+                                <option value="${s.size}" selected="selected">
+                                    ${s.size}
+                                </option>
+                            </c:if>
+                            <c:if test="${requestScope.size ne s.size}">
+                                <option value="${s.size}">
+                                    ${s.size}
+                                </option>
+                            </c:if>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="col-lg-3">
                     <div class="row">
                         <div class="col-lg-9">
                             <input type="hidden" name="tid" value="${requestScope.tid}">
                             <input type="hidden" name="cid" value="${requestScope.cid}">
                             <input type="hidden" name="bid" value="${requestScope.bid}">
+                            <input type="hidden" name="size" value="${requestScope.size}">
                             <input type="search" class="form-control p-2" name="searchContent" value="${searchContent}" placeholder="Search a service">
                         </div>
                         <div class="col-lg-3">
@@ -111,7 +131,7 @@
         <c:if test="${requestScope.products.size() >1}">
             <div class="row g-5 wow fadeInUp" data-wow-delay="0.1s">
 
-                <c:forEach items="${requestScope.products}" var="p" begin="${requestScope.Start+1}" end="${requestScope.End}">
+                <c:forEach items="${requestScope.products}" var="p" begin="${requestScope.Start}" end="${requestScope.End}">
                     <div class="col-lg-3">
                         <div class="row g-5">
                             <a href="productdetail?pid=${p.id}">

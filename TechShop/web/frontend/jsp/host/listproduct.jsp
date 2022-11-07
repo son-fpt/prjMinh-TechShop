@@ -41,16 +41,6 @@
         <link href="../frontend/assert/libAdmin/assets/css/pagerstyle.css" rel="stylesheet" type="text/css"/>
         <!-- Font Awesome Icon Library -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script>
-            function deleteProduct(id)
-            {
-                var result = confirm("Are you sure?");
-                if(result)
-                {
-                    window.location.href = "delete?id="+id;
-                }
-            }
-        </script>
     </head>
     <body>
         <!-- Pre-loader start -->
@@ -142,12 +132,12 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="user-profile.htm">
+                                                <a href="#!">
                                                     <i class="feather icon-user"></i> Profile
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="auth-normal-sign-in.htm">
+                                                <a href="../logout">
                                                     <i class="feather icon-log-out"></i> Logout
                                                 </a>
                                             </li>
@@ -199,12 +189,12 @@
                                                     <!-- List view card start -->
                                                     <div class="card">
                                                         <div class="card-header">
-                                                            <a href="add" class="btn btn-primary">List Product</a>
+                                                            <a href="add"> <button class="btn btn-primary waves-effect waves-light"> Add Product</button> </a>
                                                         </div>
                                                         <div class="row card-block">
                                                             <div class="col-md-12">
                                                                 <ul class="list-view dt-responsive table-responsive">
-                                                                    <c:if test="${requestScope.all != null}">
+                                                                    <c:if test="${requestScope.all ne null}">
                                                                         <c:forEach items="${requestScope.all}" var="pro">
                                                                             <li>
                                                                                 <div class="card list-view-media">
@@ -230,7 +220,7 @@
                                                                                                 <p>${pro.des}</p>
                                                                                                 <div class="m-t-15">
                                                                                                     <button type="button" data-toggle="tooltip" title="Delete" class="btn btn-dribbble btn-mini waves-effect waves-light">
-                                                                                                        <a style="color: whitesmoke;" href="#" onclick="deleteProduct(${pro.id});">Delete</a>
+                                                                                                        <a style="color: whitesmoke;" href="delete?id=${pro.id}">Delete</a>
                                                                                                     </button>
                                                                                                 </div>
                                                                                             </div>
@@ -240,7 +230,7 @@
                                                                             </li>
                                                                         </c:forEach>
                                                                     </c:if>
-                                                                    <c:if test="${requestScope.list == null}">
+                                                                    <c:if test="${requestScope.all eq null}">
                                                                         <h4>No Record to display</h4>
                                                                     </c:if>
                                                                 </ul>

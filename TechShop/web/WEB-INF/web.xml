@@ -80,6 +80,10 @@
         <servlet-name>DeleteProduct</servlet-name>
         <servlet-class>Control.Admin.DeleteProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteUser</servlet-name>
+        <servlet-class>Control.Admin.DeleteUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Homepage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -147,6 +151,10 @@
     <servlet-mapping>
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/product/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUser</servlet-name>
+        <url-pattern>/user/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -53,9 +53,10 @@ public class DAOProduct extends DBContext {
     }
 
     public void delete(String id) {
-        String sql = "delete from Product_HE151186 where product_id =?";
+        String sql = "DELETE FROM [Product_HE151186]\n"
+                + "      WHERE product_id = ?";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = ps(sql);
             st.setString(1, id);
             st.executeUpdate();
         } catch (Exception e) {
@@ -124,7 +125,7 @@ public class DAOProduct extends DBContext {
                 + "           ,?\n"
                 + "           ,?)";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = ps(sql);
             st.setString(1, p.getId());
             st.setString(2, p.getName());
             st.setString(3, p.getImage());
@@ -154,7 +155,7 @@ public class DAOProduct extends DBContext {
                 + "      ,[cate_id] = ?"
                 + "   WHERE product_id =? ";
         try {
-            PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = ps(sql);
             st.setString(1, p.getName());
             st.setString(2, p.getImage());
             st.setString(7, p.getTech().getId());
@@ -200,10 +201,10 @@ public class DAOProduct extends DBContext {
             sql += " [cate_id] = '" + cid_raw + "'\n";
         }
         // neu 1 trong 2 truong brand, cate ton tai va truong tech ton tai
-        if ((!"".equals(bid_raw) || !"".equals(cid_raw)) && !"".equals(tid_raw)) {
+        if ((!("".equals(bid_raw)) || !("".equals(cid_raw))) && !("".equals(tid_raw))) {
             sql += "AND [tech_id] = '" + tid_raw + "'";
         } // neu chi truong technology ton tai
-        else if ("".equals(bid_raw) && "".equals(cid_raw) && !"".equals(tid_raw)) {
+        else if ("".equals(bid_raw) && "".equals(cid_raw) && !("".equals(tid_raw))) {
             sql += "[tech_id] = '" + tid_raw + "'";
         }
         try {
