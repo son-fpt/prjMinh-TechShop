@@ -52,18 +52,13 @@ public class Homepage extends HttpServlet {
         cid_raw = (cid_raw == null || cid_raw.length() == 0) ? "" : cid_raw;
         tid_raw = (tid_raw == null || tid_raw.length() == 0) ? "" : tid_raw;
         size_raw = (size_raw == null || size_raw.length() == 0) ? "0" : size_raw;
-
-        int size = Integer.parseInt(size_raw);
-        products = p.searchProduct(bid_raw, cid_raw, tid_raw);
-
-        //get search string from client and filter product list by product name
         String searchContent = request.getParameter("searchContent");
-        
+        searchContent = (searchContent == null || searchContent.length() == 0)?"0":searchContent;
+        int size = Integer.parseInt(size_raw);
+        products = p.searchProduct(bid_raw, cid_raw, tid_raw,searchContent);
+
         if (size != 0) {
             products.removeIf(s -> (!(s.getSize() == size)));
-        }
-        if (searchContent != null) {
-            products.removeIf(s -> (!s.getName().toLowerCase().contains(searchContent.toLowerCase())));
         }
         
         //paginating

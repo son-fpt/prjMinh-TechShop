@@ -173,7 +173,7 @@ public class DAOProduct extends DBContext {
         }
     }
 
-    public List<Product> searchProduct(String bid_raw, String cid_raw, String tid_raw) {
+    public List<Product> searchProduct(String bid_raw, String cid_raw, String tid_raw, String content) {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT [product_id]\n"
                 + "      ,[product_name]\n"
@@ -186,7 +186,7 @@ public class DAOProduct extends DBContext {
                 + "      ,[cate_id]\n"
                 + "FROM [Product_HE151186]\n";
         // 1 trong 3 truong can search ton tai thi them where vao cau lenh
-        if (!"".equals(bid_raw) || !"".equals(cid_raw) || !"".equals(tid_raw)) {
+        if (!"".equals(bid_raw) || !"".equals(cid_raw) || !"".equals(tid_raw) || !"0".equals(content)) {
             sql += "WHERE ";
         }
         // neu 1 truong brand ton tai
@@ -201,14 +201,20 @@ public class DAOProduct extends DBContext {
             sql += " [cate_id] = '" + cid_raw + "'\n";
         }
         // neu 1 trong 2 truong brand, cate ton tai va truong tech ton tai
-        if ((!("".equals(bid_raw)) || !("".equals(cid_raw))) && !("".equals(tid_raw))) {
+        if ((!"".equals(bid_raw) || !"".equals(cid_raw)) && !("".equals(tid_raw))) {
             sql += "AND [tech_id] = '" + tid_raw + "'";
         } // neu chi truong technology ton tai
         else if ("".equals(bid_raw) && "".equals(cid_raw) && !("".equals(tid_raw))) {
             sql += "[tech_id] = '" + tid_raw + "'";
         }
+        if (!"0".equals(content) && "".equals(bid_raw) && "".equals(cid_raw) && "".equals(tid_raw)) {
+            sql += "[product_name] like '%"+content+"%'";
+        } else if (!"".equals(bid_raw) || !"".equals(cid_raw)||!"".equals(tid_raw)) {
+            sql += " AND [product_name] like '%"+content+"%'";
+        }
         try {
             PreparedStatement st = ps(sql);
+            System.out.println(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 list.add(new Product(rs.getString("product_id"),
