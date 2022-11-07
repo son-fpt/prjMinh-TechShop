@@ -188,9 +188,6 @@
                                                     <div class="col-sm-12">
                                                         <!-- List view card start -->
                                                         <div class="card">
-                                                            <div class="card-header">
-                                                                <a href="add" class="btn btn-primary">Add Product</a>
-                                                            </div>
                                                             <div class="row card-block">
                                                                 <div class="col-md-12">
                                                                     <form action="add" method="POST" enctype="multipart/form-data">
