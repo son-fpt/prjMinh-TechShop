@@ -55,31 +55,31 @@
                                                     </div>
                                                     <div class="row">
                                                         <label>List Item</label>
-                                                        <c:forEach items="${requestScope.order.od}" var="ods">
+                                                        <c:forEach items="${requestScope.order.od}" var="s">
                                                             <table>
                                                                 <tr>
                                                                     <td>
-                                                                        <img src="${ods.p.image}" alt="alt"/>
+                                                                        <img src="${s.p.image}" alt="alt"/>
                                                                     </td>
                                                                     <td>
                                                                         <div class="col-12">
                                                                             <div>
-                                                                                Name: ${ods.p.name}
+                                                                                Name: ${s.p.name}
                                                                             </div>
                                                                             <div>
-                                                                                Brand: ${ods.p.brand.name}
+                                                                                Brand: ${s.p.brand.name}
                                                                             </div>
                                                                             <div>
-                                                                                Size:${ods.p.size}
+                                                                                Size:${s.p.size}
                                                                             </div>
                                                                             <div>
-                                                                                Category: ${ods.p.cate.name}
+                                                                                Category: ${s.p.cate.name}
                                                                             </div>
                                                                             <div>
-                                                                                Price: ${ods.p.price}
+                                                                                Price: ${s.p.price}
                                                                             </div>
                                                                             <div>
-                                                                                Quantity: ${ods.quantity}
+                                                                                Quantity: ${s.quantity}
                                                                             </div>
                                                                         </div>
                                                                     </td>
