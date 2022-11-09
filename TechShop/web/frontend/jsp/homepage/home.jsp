@@ -128,10 +128,10 @@
             </div>
 
         </c:if>
-        <c:if test="${requestScope.products.size() >1}">
+        <c:if test="${requestScope.products.size() >= 1}">
             <div class="row g-5 wow fadeInUp" data-wow-delay="0.1s">
 
-                <c:forEach items="${requestScope.products}" var="p" begin="${requestScope.Start}" end="${requestScope.End}">
+                <c:forEach items="${requestScope.products}" var="p" begin="${requestScope.Start}" end="${requestScope.End+1}">
                     <div class="col-lg-3">
                         <div class="row g-5">
                             <a href="productdetail?pid=${p.id}">

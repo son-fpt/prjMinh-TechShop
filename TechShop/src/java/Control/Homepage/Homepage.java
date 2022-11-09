@@ -72,7 +72,7 @@ public class Homepage extends HttpServlet {
         int totalProduct = products.size();
 
         int productPerPage = 9;
-        int totalPage = (totalProduct % productPerPage == 0) ? (totalProduct / productPerPage) : (totalProduct / productPerPage + 1);
+        int totalPage = (totalProduct % productPerPage == 0) ? (totalProduct / productPerPage) : (totalProduct / productPerPage) ;
 
         int End = productPerPage * pageNow - 1;
         int Start = End + 1 - productPerPage;
@@ -95,10 +95,6 @@ public class Homepage extends HttpServlet {
         request.getRequestDispatcher(homePath).forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 
     @Override
     public String getServletInfo() {
